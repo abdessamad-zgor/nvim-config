@@ -11,43 +11,31 @@ return require('packer').startup(function(use)
 		-- or                            , branch = '0.1.x',
 		requires = { { 'nvim-lua/plenary.nvim' } }
 	}
---    use({
---		'rose-pine/neovim',
---		as = 'rose-pine',
---		config = function()
---			vim.cmd('colorscheme rose-pine')
---		end
---	})
-	use({ 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } })
---	use {
---		'VonHeikemen/lsp-zero.nvim',
---		branch = 'v2.x',
---		requires = {
---			-- LSP Support
---			{ 'neovim/nvim-lspconfig' }, -- Required
---			{
---			       -- Optional
---				'williamboman/mason.nvim',
---				run = function()
---					pcall(vim.cmd, 'MasonUpdate')
---				end,
---			},
---			{ 'williamboman/mason-lspconfig.nvim' }, -- Optional
---
---			-- Autocompletion
---			{ 'hrsh7th/nvim-cmp' }, -- Required
---			{ 'hrsh7th/cmp-nvim-lsp' }, -- Required
---			{ 'L3MON4D3/LuaSnip' }, -- Required
---		}
---	}
-    use {'neoclide/coc.nvim', branch="release"}
-    --use 'folke/tokyonight.nvim'
-    --use 'junegunn/seoul256.vim'
-    --use 'rafi/awesome-vim-colorschemes'
+ 	use({ 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } })
+    use {
+    	'VonHeikemen/lsp-zero.nvim',
+    	branch = 'v2.x',
+    	requires = {
+    		-- LSP Support
+    		{ 'neovim/nvim-lspconfig' }, -- Required
+    		{
+    		       -- Optional
+    			'williamboman/mason.nvim',
+    			run = function()
+    				pcall(vim.cmd, 'MasonUpdate')
+    			end,
+    		},
+    		{ 'williamboman/mason-lspconfig.nvim' }, -- Optional 
+    		-- Autocompletion
+    		{ 'hrsh7th/nvim-cmp' }, -- Required
+    		{ 'hrsh7th/cmp-nvim-lsp' }, -- Required
+    		{ 'L3MON4D3/LuaSnip' }, -- Required
+    	}
+    }
+    use 'rafi/awesome-vim-colorschemes'
     use 'NLKNguyen/papercolor-theme'
-    --use 'morhetz/gruvbox'
-use {
-  'nvim-lualine/lualine.nvim',
-  requires = { 'nvim-tree/nvim-web-devicons' }
-}
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons' }
+    }
 end)
