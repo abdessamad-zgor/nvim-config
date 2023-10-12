@@ -1,24 +1,42 @@
 vim.g.mapleader = " "
-vim.keymap.set('n', '<leader><BS>' , vim.cmd.Ex)
-vim.keymap.set("n", "<A-j>",":m .+1<CR>==")
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
-vim.keymap.set("n", "<leader>c", "0<C-v>$y")
-vim.keymap.set("n", "<leader>x", "0<C-v>$d")
+local keymap = vim.keymap.set
+local opts = {silent=true, noremap=true}
+keymap('n', '<leader><BS>' , vim.cmd.Ex,opts)
+keymap('n', '<leader>L', ':Lex 30<CR>',opts)
+keymap("n", "<A-j>",":m .+1<CR>==",opts)
+keymap("n", "<A-k>", ":m .-2<CR>==",opts)
+keymap("n", "<leader>c", "0<C-v>$y",opts)
+keymap("n", "<leader>x", "0<C-v>$d",opts)
 -- open [], {} and indent them
-vim.keymap.set("i", '<A-n>', '<CR><Esc>%o')
--- make reduces developement time 10x
-vim.keymap.set("i", '"', '""<Esc>ha')
-vim.keymap.set("i", '(', '()<Esc>ha')
-vim.keymap.set("i", '{', '{}<Esc>ha')
-vim.keymap.set("i", '[', '[]<Esc>ha')
-vim.keymap.set("i", "'", "''<Esc>ha")
-vim.keymap.set("i", "`", "``<Esc>ha")
+keymap("i", '<A-n>', '<CR><Esc>%o',opts)
+-- make reduces developement time 10x keymap("i", '"', '""<Esc>ha',opts)
+keymap("i", '(', '()<Esc>ha', opts)
+keymap("i", '{', '{}<Esc>ha',opts)
+keymap("i", '[', '[]<Esc>ha',opts)
+keymap("i", "'", "''<Esc>ha",opts)
+keymap("i", "`", "``<Esc>ha",opts)
+keymap("i", '"', '""<Esc>ha', opts)
 -- insert mode got jealous
-vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==a")
-vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==a")
+keymap("i", "<A-j>", "<Esc>:m .+1<CR>==a",opts)
+keymap("i", "<A-k>", "<Esc>:m .-2<CR>==a",opts)
 -- windows style save <3
-vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>")
-vim.keymap.set("i", "<A-p>", "<Esc>pa")
-vim.keymap.set("n", "<leader>bf", ":buffers<CR>")
-vim.keymap.set("n", "<leader>bp", ":bp<CR>")
-vim.keymap.set("n", "<leader>bn", ":bNext<CR>")
+keymap("i", "<C-s>", "<Esc>:w<CR>",opts)
+keymap("i", "<A-p>", "<Esc>pa",opts)
+keymap("n", "<leader>bf", ":buffers<CR>",opts)
+keymap("n", "<leader>bp", ":bp<CR>",opts)
+keymap("n", "<leader>bn", ":bNext<CR>",opts)
+-- window navigation
+keymap("n","<C-h>", "<C-w>h", opts)
+keymap("n", "<C-l>", "<C-w>l", opts)
+keymap("n", "<C-j>", "<C-w>j", opts)
+keymap("n", "<C-k>", "<C-w>k", opts)
+--indent block
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
+-- move block
+keymap("v", "<A-j>", ":m .+1<cr>==", opts)
+keymap("v", "<A-k>", ":m .-2<cr>==", opts)
+-- buffer editting
+keymap("n", "q", ":q<CR>", opts)
+keymap("n", "<leader>ex", ":bufdo wq", opts)
+
