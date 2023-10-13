@@ -1,8 +1,6 @@
-vim.g.mapleader = " "
-local keymap = vim.keymap.set
+local keymap = vim.api.nvim_set_keymap
 local opts = {silent=true, noremap=true}
-keymap('n', '<leader><BS>' , vim.cmd.Ex,opts)
-keymap('n', '<leader>L', ':Lex 30<CR>',opts)
+vim.g.mapleader = " "
 keymap("n", "<A-j>",":m .+1<CR>==",opts)
 keymap("n", "<A-k>", ":m .-2<CR>==",opts)
 keymap("n", "<leader>c", "0<C-v>$y",opts)
@@ -12,8 +10,8 @@ keymap("i", '<A-n>', '<CR><Esc>%o',opts)
 -- make reduces developement time 10x keymap("i", '"', '""<Esc>ha',opts)
 keymap("i", '(', '()<Esc>ha', opts)
 keymap("i", '{', '{}<Esc>ha',opts)
-keymap("i", '[', '[]<Esc>ha',opts)
 keymap("i", "'", "''<Esc>ha",opts)
+keymap("i", '[', '[]<Esc>ha',opts)
 keymap("i", "`", "``<Esc>ha",opts)
 keymap("i", '"', '""<Esc>ha', opts)
 -- insert mode got jealous
@@ -21,7 +19,6 @@ keymap("i", "<A-j>", "<Esc>:m .+1<CR>==a",opts)
 keymap("i", "<A-k>", "<Esc>:m .-2<CR>==a",opts)
 -- windows style save <3
 keymap("i", "<C-s>", "<Esc>:w<CR>",opts)
-keymap("i", "<A-p>", "<Esc>pa",opts)
 keymap("n", "<leader>bf", ":buffers<CR>",opts)
 keymap("n", "<leader>bp", ":bp<CR>",opts)
 keymap("n", "<leader>bn", ":bNext<CR>",opts)
@@ -34,9 +31,8 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 -- move block
-keymap("v", "<A-j>", ":m .+1<cr>==", opts)
-keymap("v", "<A-k>", ":m .-2<cr>==", opts)
+keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
+keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 -- buffer editting
 keymap("n", "q", ":q<CR>", opts)
-keymap("n", "<leader>ex", ":bufdo wq", opts)
 
