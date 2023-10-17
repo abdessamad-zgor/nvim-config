@@ -60,6 +60,49 @@ local function lsp_highlight_document(client)
   end
 end
 
+-- LSP rename
+--local function LspRename()
+--    local curr_name = vim.fn.expand("<cword>")
+--    local value = vim.fn.input("LSP Rename: ", curr_name)
+--    local lsp_params = vim.lsp.util.make_position_params()
+--
+--    if not value or #value == 0 or curr_name == value then return end
+--
+--    -- request lsp rename
+--    lsp_params.newName = value
+--    vim.lsp.buf_request(0, "textDocument/rename", lsp_params, function(_, res, ctx, _)
+--      if not res then return end
+--
+--      -- apply renames
+--      local client = vim.lsp.get_client_by_id(ctx.client_id)
+--      vim.lsp.util.apply_workspace_edit(res, client.offset_encoding)
+--
+--      -- print renames
+--      local changed_files_count = 0
+--      local changed_instances_count = 0
+--      if (res.documentChanges) then
+--        for _, changed_file in pairs(res.documentChanges) do
+--          changed_files_count = changed_files_count + 1
+--          changed_instances_count = changed_instances_count + #changed_file.edits
+--        end
+--      elseif (res.changes) then
+--        for _, changed_file in pairs(res.changes) do
+--          changed_instances_count = changed_instances_count + #changed_file
+--          changed_files_count = changed_files_count + 1
+--        end
+--      end
+--      -- compose the right print message
+--      print(string.format("renamed %s instance%s in %s file%s. %s",
+--        changed_instances_count,
+--        changed_instances_count == 1 and '' or 's',
+--        changed_files_count,
+--        changed_files_count == 1 and '' or 's',
+--        changed_files_count > 1 and "To save them run ':wa'" or ''
+--      ))
+--    end)
+--end
+
+-- LSP remaps
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -81,8 +124,11 @@ local function lsp_keymaps(bufnr)
   )
   vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+  -- vim.api.nvim_buf_set_keymap(burnr, "n", "rrn", "<cmdrlua LspRename()<CR>", opts)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
+
+
 
 M.on_attach = function(client, bufnr)
   if client.name == "tsserver" then

@@ -1,9 +1,10 @@
 
 local servers = {
-    "tsserver",
-    "lua_ls",
+  "tsserver",
+  "lua_ls",
 	"pyright",
 	"jsonls",
+  "svelte"
 }
 
 local settings = {
