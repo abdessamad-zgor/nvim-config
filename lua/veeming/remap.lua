@@ -25,12 +25,12 @@ keymap("n", "<leader>bn", ":bNext<CR>",opts)
 -- window navigation
 keymap("n", "wwh", ":split<CR>", opts)
 keymap("n", "wwv", ":vsplit<CR>", opts)
-keymap("n","<C-h>h", "<C-w>h", opts)
-keymap("n", "<C-l>l", "<C-w>l", opts)
-keymap("n", "<C-j>j", "<C-w>j", opts)
-keymap("n", "<C-k>k", "<C-w>k", opts)
+keymap("n","wh", "<C-w>h", opts)
+keymap("n", "wl", "<C-w>l", opts)
+keymap("n", "wj", "<C-w>j", opts)
+keymap("n", "wk", "<C-w>k", opts)
 --open terminal
-keymap("n", "wwt", ":split<CR>:ter<CR>i", opts)
+keymap("n", "wwt", ":vsplit<CR>:ter<CR>i", opts)
 --indent block
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)

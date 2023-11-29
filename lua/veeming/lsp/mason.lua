@@ -4,7 +4,8 @@ local servers = {
   "lua_ls",
 	"pyright",
 	"jsonls",
-  "svelte"
+  "svelte",
+  "jdtls"
 }
 
 local settings = {
@@ -33,18 +34,17 @@ end
 
 local opts = {}
 
-for _, server in pairs(servers) do
-	opts = {
-		on_attach = require("veeming.lsp.handlers").on_attach,
-		capabilities = require("veeming.lsp.handlers").capabilities,
-	}
+require("mason-lspconfig").setup_handlers {
+  function (server)
+    opts = {
+      on_attach = require("veeming.lsp.handlers").on_attach,
+      capabilities = require("veeming.lsp.handlers").capabilities,
+    }
+    local require_ok, conf_opts = pcall(require, "veeming.lsp.settings." .. server)
+    if require_ok then
+      opts = vim.tbl_deep_extend("force", conf_opts, opts)
+    end
 
-	server = vim.split(server, "@")[1]
-
-	local require_ok, conf_opts = pcall(require, "veeming.lsp.settings." .. server)
-	if require_ok then
-		opts = vim.tbl_deep_extend("force", conf_opts, opts)
-	end
-
-	lspconfig[server].setup(opts)
-end
+    lspconfig[server].setup(opts)
+  end
+}
