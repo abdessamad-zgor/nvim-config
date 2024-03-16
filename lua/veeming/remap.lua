@@ -37,6 +37,6 @@ keymap("v", ">", ">gv", opts)
 -- move block
 keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
--- buffer editting
-keymap("n", "q", ":q<CR>", opts)
 
+keymap("n", '<leader>nh', ':noh<CR>', opts)
+keymap("n", '<leader>qq', ':qa<CR>', opts)
