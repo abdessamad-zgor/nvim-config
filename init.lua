@@ -54,7 +54,10 @@ require("lazy").setup({
             "catppuccin/nvim",
             name = "catppuccin",
             priority = 1000
-        }
+        },
+		{
+			"42paris/42header"
+		}
     },
     checker = { enabled = true },
 })
